@@ -1,0 +1,11 @@
+body {
+  margin: 0;
+  background: grey;
+
+  .container {
+    .item {
+      border: 1px solid black;
+      writing-mode: vertical-lr;
+    }
+  }
+}
