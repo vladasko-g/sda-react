@@ -25,9 +25,6 @@ export const Header = () => {
           <Link to="/users">Users</Link>
         </li>
         <li>
-          <Link to="/settings">Settings</Link>
-        </li>
-        <li>
           <Link to="/redirect">Redirect</Link>
         </li>
       </ul>
