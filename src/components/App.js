@@ -1,9 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback, useMemo } from "react";
 
 import { List } from "./List";
 import { Button } from "./Button";
 
+// https://reactjs.org/docs/react-api.html
+// memo - for when you want to AVOID RENDERS when parent renders (usually)
+// useCallback - used to remember a function through different renders
+// useMemo - used to remember a value through different renders
+
 export const App = () => {
+  console.log("App rendered");
+
   const [todos, setTodos] = useState([]);
   const [count, setCount] = useState(0);
 
@@ -17,15 +24,27 @@ export const App = () => {
     })();
   }, []);
 
-  const items = todos.map(todo => ({ id: todo.id, text: todo.title }));
+  const items = useMemo(
+    () => todos.map(todo => ({ id: todo.id, text: todo.title })),
+    [todos],
+  );
+
+  const incrementButton = useMemo(
+    () => (
+      <Button name="increment" onClick={() => setCount(count => count + 1)}>
+        increment
+      </Button>
+    ),
+    [setCount],
+  );
+
+  const decrement = useCallback(() => setCount(count => count - 1), [setCount]);
 
   return (
     <div>
       <p>count: {count}</p>
-      <Button name="increment" onClick={() => setCount(count => count + 1)}>
-        increment
-      </Button>
-      <Button name="decrement" onClick={() => setCount(count => count - 1)}>
+      {incrementButton}
+      <Button name="decrement" onClick={decrement}>
         decrement
       </Button>
       <List items={items} />

@@ -2,7 +2,9 @@ import React, { memo } from "react";
 
 import { ListItem } from "./ListItem";
 
-export const List = ({ items }) => {
+export const List = memo(({ items }) => {
+  console.log("List rendered");
+
   return (
     <ul>
       {items.map(item => (
@@ -10,4 +12,4 @@ export const List = ({ items }) => {
       ))}
     </ul>
   );
-};
+});
