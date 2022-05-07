@@ -4,6 +4,8 @@ import { List } from "./List";
 import { Button } from "./Button";
 
 export const App = () => {
+  console.log("App rendered");
+
   const [todos, setTodos] = useState([]);
   const [count, setCount] = useState(0);
 
